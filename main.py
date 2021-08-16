@@ -103,7 +103,7 @@ fail_list: List[int] = []
 with open(os.path.join(wavs_dir_path, 'sentences.json'), 'w') as f:
     json.dump(sentence_list, f, indent=2, ensure_ascii=False)
 
-for i in range(len(sentence_list) if len(sentence_list) < 500 else sentences_limit):
+for i in range(sentence_num if sentence_num < 500 else sentences_limit):
     print(f'{datetime.datetime.now()} {str(i + 1).zfill(len(str(sentence_num)))}/{sentence_num} {sentence_list[i]}')
     file_name: str = f'{i}.wav'
     save_path: str = os.path.join(wavs_dir_path, file_name)
@@ -125,5 +125,4 @@ with open(os.path.join(wavs_dir_path, 'fail_sentences.json'), 'w') as f:
     json.dump(fail_list, f, indent=2, ensure_ascii=False)
 
 out_path: str = os.path.join('audiobook', nobel_name, f'{nobel_name}.wav')
-
-join_waves([os.path.join(wavs_dir_path, f'{i}.wav') for i in range(sentence_num) if i not in fail_list], out_path)
+join_waves([os.path.join(wavs_dir_path, f'{i}.wav') for i in range(sentence_num if sentence_num < 500 else sentences_limit) if i not in fail_list], out_path)
