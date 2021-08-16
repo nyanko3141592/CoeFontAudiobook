@@ -95,8 +95,7 @@ ruby_list = ['《.+?》', '［＃１０字下げ］', '［＃.+?］', '〔.+?〕
 text = del_ruby(text, *ruby_list)
 print(f'文字数 {len(text)}')
 sentence_list: List[str] = text.split('\n')
-sentence_list = [s.split('。') for s in sentence_list]
-sentence_list = list(itertools.chain.from_iterable(sentence_list)) + ['ボイスド　バイ コエフォントクラウド']
+sentence_list = list(itertools.chain.from_iterable([s.split('。') for s in sentence_list])) + ['ボイスド　バイ コエフォントクラウド']
 
 sentence_num: int = len(sentence_list)
 fail_list: List[int] = []
